@@ -25,7 +25,7 @@ from qiskit.test import QiskitTestCase
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, transpile
 from qiskit.test.mock import FakeTenerife
 from qiskit.visualization.circuit_visualization import _matplotlib_circuit_drawer
-from qiskit.circuit.library import XGate, MCXGate, HGate, RZZGate, SwapGate, DCXGate
+from qiskit.circuit.library import XGate, MCXGate, HGate, RZZGate, SwapGate, DCXGate, CHGate, CYGate
 from qiskit.extensions import HamiltonianGate
 from qiskit.circuit import Parameter
 from qiskit.circuit.library import IQP
@@ -293,9 +293,9 @@ class TestMatplotlibDrawer(QiskitTestCase):
         """Test control labels"""
         qr = QuantumRegister(4, 'q')
         circuit = QuantumCircuit(qr)
-        circuit.cy(1, 0, label='Bottom Y Label')
-        circuit.cy(2, 3, label='Top Y Label')
-        circuit.ch(0, 1, label='Top H Label')
+        circuit.append(CYGate(label="Bottom Y Label"), [1, 0])
+        circuit.append(CYGate(label="Top Y Label"), [2, 3])
+        circuit.append(CHGate(label="Top H Label"), [0, 1])
         circuit.append(HGate(label='H Gate Label').control(3, label='H Control Label',
                                                            ctrl_state='010'),
                        [qr[1], qr[2], qr[3], qr[0]])

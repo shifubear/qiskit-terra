@@ -2056,10 +2056,15 @@ class QuantumCircuit:
         return self.append(HGate(), [qubit], [])
 
     def ch(self, control_qubit, target_qubit,  # pylint: disable=invalid-name
-           ctrl_state=None):
+           label=None, ctrl_state=None):
         """Apply :class:`~qiskit.circuit.library.CHGate`."""
         from .library.standard_gates.h import CHGate
-        return self.append(CHGate(ctrl_state=ctrl_state),
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(CHGate(label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(CHGate(label=label, ctrl_state=ctrl_state),
                            [control_qubit, target_qubit], [])
 
     def i(self, qubit):
@@ -2082,10 +2087,15 @@ class QuantumCircuit:
         from .library.standard_gates.p import PhaseGate
         return self.append(PhaseGate(theta), [qubit], [])
 
-    def cp(self, theta, control_qubit, target_qubit):
+    def cp(self, theta, control_qubit, target_qubit, label=None, ctrl_state=None):
         """Apply :class:`~qiskit.circuit.library.CPhaseGate`."""
         from .library.standard_gates.p import CPhaseGate
-        return self.append(CPhaseGate(theta),
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(CPhaseGate(, theta, label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(CPhaseGate(theta, label=label, ctrl_state=ctrl_state),
                            [control_qubit, target_qubit], [])
 
     def mcp(self, lam, control_qubits, target_qubit):
@@ -2112,15 +2122,25 @@ class QuantumCircuit:
                            [control_qubit1, control_qubit2, control_qubit3, target_qubit],
                            [])
 
-    def rx(self, theta, qubit):  # pylint: disable=invalid-name
+    def rx(self, theta, qubit, label=None):  # pylint: disable=invalid-name
         """Apply :class:`~qiskit.circuit.library.RXGate`."""
         from .library.standard_gates.rx import RXGate
-        return self.append(RXGate(theta), [qubit], [])
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(RXGate(theta, label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(RXGate(theta, label=label), [qubit], [])
 
-    def crx(self, theta, control_qubit, target_qubit):
+    def crx(self, theta, control_qubit, target_qubit, label=None, ctrl_state=None):
         """Apply :class:`~qiskit.circuit.library.CRXGate`."""
         from .library.standard_gates.rx import CRXGate
-        return self.append(CRXGate(theta),
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(CRXGate(theta, label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(CRXGate(theta, label=label, ctrl_state=ctrl_state),
                            [control_qubit, target_qubit], [])
 
     def rxx(self, theta, qubit1, qubit2):
@@ -2128,15 +2148,25 @@ class QuantumCircuit:
         from .library.standard_gates.rxx import RXXGate
         return self.append(RXXGate(theta), [qubit1, qubit2], [])
 
-    def ry(self, theta, qubit):  # pylint: disable=invalid-name
+    def ry(self, theta, qubit, label=None):  # pylint: disable=invalid-name
         """Apply :class:`~qiskit.circuit.library.RYGate`."""
         from .library.standard_gates.ry import RYGate
-        return self.append(RYGate(theta), [qubit], [])
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(RYGate(theta, label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(RYGate(theta, label=label), [qubit], [])
 
-    def cry(self, theta, control_qubit, target_qubit):
+    def cry(self, theta, control_qubit, target_qubit, label=None, ctrl_state=None):
         """Apply :class:`~qiskit.circuit.library.CRYGate`."""
         from .library.standard_gates.ry import CRYGate
-        return self.append(CRYGate(theta),
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(CRYGate(theta, label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(CRYGate(theta, label=label, ctrl_state=ctrl_state),
                            [control_qubit, target_qubit], [])
 
     def ryy(self, theta, qubit1, qubit2):
@@ -2149,10 +2179,15 @@ class QuantumCircuit:
         from .library.standard_gates.rz import RZGate
         return self.append(RZGate(phi), [qubit], [])
 
-    def crz(self, theta, control_qubit, target_qubit):
+    def crz(self, theta, control_qubit, target_qubit, label=None, ctrl_state=None):
         """Apply :class:`~qiskit.circuit.library.CRZGate`."""
         from .library.standard_gates.rz import CRZGate
-        return self.append(CRZGate(theta),
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(CRZGate(theta, label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(CRZGate(theta, label=label, ctrl_state=ctrl_state),
                            [control_qubit, target_qubit], [])
 
     def rzx(self, theta, qubit1, qubit2):
@@ -2185,10 +2220,15 @@ class QuantumCircuit:
         from .library.standard_gates.iswap import iSwapGate
         return self.append(iSwapGate(), [qubit1, qubit2], [])
 
-    def cswap(self, control_qubit, target_qubit1, target_qubit2):
+    def cswap(self, control_qubit, target_qubit1, target_qubit2, label=None, ctrl_state=None):
         """Apply :class:`~qiskit.circuit.library.CSwapGate`."""
         from .library.standard_gates.swap import CSwapGate
-        return self.append(CSwapGate(),
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(CSwapGate(label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(CSwapGate(label=label, ctrl_state=ctrl_state),
                            [control_qubit, target_qubit1, target_qubit2], [])
 
     def fredkin(self, control_qubit, target_qubit1, target_qubit2):
@@ -2205,10 +2245,15 @@ class QuantumCircuit:
         from .library.standard_gates.sx import SXdgGate
         return self.append(SXdgGate(), [qubit], [])
 
-    def csx(self, control_qubit, target_qubit):
+    def csx(self, control_qubit, target_qubit, label=None, ctrl_state=None):
         """Apply :class:`~qiskit.circuit.library.CSXGate`."""
         from .library.standard_gates.sx import CSXGate
-        return self.append(CSXGate(),
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(CSXGate(label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(CSXGate(label=label, ctrl_state=ctrl_state),
                            [control_qubit, target_qubit], [])
 
     def t(self, qubit):  # pylint: disable=invalid-name
@@ -2227,10 +2272,16 @@ class QuantumCircuit:
         return self.append(UGate(theta, phi, lam), [qubit], [])
 
     def cu(self, theta, phi, lam, gamma,   # pylint: disable=invalid-name
-           control_qubit, target_qubit):
+           control_qubit, target_qubit, label=None, ctrl_state=None):
         """Apply :class:`~qiskit.circuit.library.CUGate`."""
         from .library.standard_gates.u import CUGate
-        return self.append(CUGate(theta, phi, lam, gamma),
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(CUGate(theta, phi, lam, gamma, "
+                          "label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(CUGate(theta, phi, lam, gamma, label=label, ctrl_state=ctrl_state),
                            [control_qubit, target_qubit], [])
 
     def u1(self, theta, qubit):  # pylint: disable=invalid-name
@@ -2242,14 +2293,19 @@ class QuantumCircuit:
                       DeprecationWarning, stacklevel=2)
         return self.append(U1Gate(theta), [qubit], [])
 
-    def cu1(self, theta, control_qubit, target_qubit):
+    def cu1(self, theta, control_qubit, target_qubit, label=None, ctrl_state=None):
         """Apply :class:`~qiskit.circuit.library.CU1Gate`."""
         from .library.standard_gates.u1 import CU1Gate
         warnings.warn('The QuantumCircuit.cu1 method is deprecated as of 0.16.0. It will be '
                       'removed no earlier than 3 months after the release date. You should use the '
                       'QuantumCircuit.cp method instead, which acts identically.',
                       DeprecationWarning, stacklevel=2)
-        return self.append(CU1Gate(theta),
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(CU1Gate(theta, label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(CU1Gate(theta, label=label, ctrl_state=ctrl_state),
                            [control_qubit, target_qubit], [])
 
     def mcu1(self, lam, control_qubits, target_qubit):
@@ -2284,32 +2340,46 @@ class QuantumCircuit:
                       DeprecationWarning, stacklevel=2)
         return self.append(U3Gate(theta, phi, lam), [qubit], [])
 
-    def cu3(self, theta, phi, lam, control_qubit, target_qubit):
+    def cu3(self, theta, phi, lam, control_qubit, target_qubit, label=None, ctrl_state=None):
         """Apply :class:`~qiskit.circuit.library.CU3Gate`."""
         from .library.standard_gates.u3 import CU3Gate
         warnings.warn('The QuantumCircuit.cu3 method is deprecated as of 0.16.0. It will be '
                       'removed no earlier than 3 months after the release date. You should use the '
                       'QuantumCircuit.cu method instead, where cu3(ϴ,φ,λ) = cu(ϴ,φ,λ,0).',
                       DeprecationWarning, stacklevel=2)
-        return self.append(CU3Gate(theta, phi, lam),
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(CU3Gate(theta, phi, lam, label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(CU3Gate(theta, phi, lam, label=label, ctrl_state=ctrl_state),
                            [control_qubit, target_qubit], [])
 
-    def x(self, qubit):
+    def x(self, qubit, label=None):
         """Apply :class:`~qiskit.circuit.library.XGate`."""
         from .library.standard_gates.x import XGate
-        print("Updated")
-        return self.append(XGate(), [qubit], [])
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(XGate(label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(XGate(label=label), [qubit], [])
 
     def cx(self, control_qubit, target_qubit,  # pylint:disable=invalid-name
-           ctrl_state=None):
+           label=None, ctrl_state=None):
         """Apply :class:`~qiskit.circuit.library.CXGate`."""
         from .library.standard_gates.x import CXGate
-        return self.append(CXGate(ctrl_state=ctrl_state),
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(CXGate(label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(CXGate(label=label, ctrl_state=ctrl_state),
                            [control_qubit, target_qubit], [])
 
-    def cnot(self, control_qubit, target_qubit):
+    def cnot(self, control_qubit, target_qubit, label=None, ctrl_state=None):
         """Apply :class:`~qiskit.circuit.library.CXGate`."""
-        self.cx(control_qubit, target_qubit)
+        self.cx(control_qubit, target_qubit, label, ctrl_state)
 
     def dcx(self, qubit1, qubit2):
         """Apply :class:`~qiskit.circuit.library.DCXGate`."""
@@ -2391,10 +2461,15 @@ class QuantumCircuit:
         return self.append(YGate(), [qubit], [])
 
     def cy(self, control_qubit, target_qubit,   # pylint: disable=invalid-name
-           ctrl_state=None):
+           label=None, ctrl_state=None):
         """Apply :class:`~qiskit.circuit.library.CYGate`."""
         from .library.standard_gates.y import CYGate
-        return self.append(CYGate(ctrl_state=ctrl_state),
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(CYGate(label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(CYGate(label=label, ctrl_state=ctrl_state),
                            [control_qubit, target_qubit], [])
 
     def z(self, qubit):
@@ -2402,10 +2477,16 @@ class QuantumCircuit:
         from .library.standard_gates.z import ZGate
         return self.append(ZGate(), [qubit], [])
 
-    def cz(self, control_qubit, target_qubit):  # pylint: disable=invalid-name
+    def cz(self, control_qubit, target_qubit,  # pylint: disable=invalid-name
+           label=None, ctrl_state=None):
         """Apply :class:`~qiskit.circuit.library.CZGate`."""
         from .library.standard_gates.z import CZGate
-        return self.append(CZGate(),
+        if label is not None:
+            warnings.warn("Passing labels in shortcuts is deprecated. "
+                          "Use circuit.append(CZGate(label=%s" % label +
+                          ") instead.",
+                          DeprecationWarning)
+        return self.append(CZGate(label=label, ctrl_state=ctrl_state),
                            [control_qubit, target_qubit], [])
 
     def pauli(self, pauli_string, qubits):  # pylint: disable=invalid-name
